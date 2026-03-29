@@ -26,7 +26,7 @@
     - 启用 WAL 模式和外键约束
     - _需求: 6.1_
 
-  - [ ] 2.2 编写 Knex 数据库迁移文件
+  - [x] 2.2 编写 Knex 数据库迁移文件
     - 创建 `users` 表迁移：id, username(唯一), password_hash, created_at
     - 创建 `categories` 表迁移：id, name(唯一), slug(唯一), created_at
     - 创建 `tags` 表迁移：id, name(唯一), slug(唯一), created_at
