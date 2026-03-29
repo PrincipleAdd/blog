@@ -53,7 +53,7 @@
     - 测试 slug 冲突时的数字后缀追加
     - _需求: 7.1_
 
-  - [ ] 3.3 实现 JWT 认证中间件
+  - [-] 3.3 实现 JWT 认证中间件
     - 创建 `server/src/middleware/auth.js`
     - 从 `Authorization: Bearer <token>` 头中提取并验证 JWT
     - 验证成功将 `{ userId, username }` 挂载到 `req.user`
