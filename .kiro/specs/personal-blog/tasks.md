@@ -133,7 +133,7 @@
     - `DELETE /api/admin/categories/:id`：删除分类（需认证）
     - _需求: 2.1, 2.3, 2.4_
 
-  - [-] 5.5 实现标签路由
+  - [x] 5.5 实现标签路由
     - 创建 `server/src/routes/tags.js`
     - `GET /api/tags`：获取所有标签（含文章数）
     - `GET /api/tags/:slug`：获取标签下的文章
@@ -141,7 +141,7 @@
     - `DELETE /api/admin/tags/:id`：删除标签（需认证）
     - _需求: 3.1, 3.3, 3.4_
 
-  - [ ] 5.6 实现 Sitemap 路由
+  - [-] 5.6 实现 Sitemap 路由
     - 创建 `server/src/routes/sitemap.js`
     - `GET /sitemap.xml`：生成包含所有已发布文章 URL 的 XML sitemap
     - _需求: 7.3_
