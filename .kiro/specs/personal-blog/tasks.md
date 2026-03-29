@@ -68,7 +68,7 @@
     - 实现 `hashPassword(password)`：使用 bcryptjs 加密密码
     - _需求: 5.1, 5.2, 5.3, 5.4, 5.5_
 
-  - [-] 4.2 实现分类服务
+  - [x] 4.2 实现分类服务
     - 创建 `server/src/services/categoryService.js`
     - 实现 `createCategory(name)`：创建分类并自动生成 slug
     - 实现 `deleteCategory(id)`：删除分类
@@ -76,7 +76,7 @@
     - 实现 `getCategoryBySlug(slug)`：按 slug 查询分类
     - _需求: 2.1, 2.3, 2.4_
 
-  - [ ] 4.3 实现标签服务
+  - [-] 4.3 实现标签服务
     - 创建 `server/src/services/tagService.js`
     - 实现 `createTag(name)`：创建标签并自动生成 slug
     - 实现 `deleteTag(id)`：删除标签
