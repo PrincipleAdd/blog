@@ -76,7 +76,7 @@
     - 实现 `getCategoryBySlug(slug)`：按 slug 查询分类
     - _需求: 2.1, 2.3, 2.4_
 
-  - [-] 4.3 实现标签服务
+  - [x] 4.3 实现标签服务
     - 创建 `server/src/services/tagService.js`
     - 实现 `createTag(name)`：创建标签并自动生成 slug
     - 实现 `deleteTag(id)`：删除标签
@@ -84,7 +84,7 @@
     - 实现 `getTagBySlug(slug)`：按 slug 查询标签
     - _需求: 3.1, 3.2, 3.3, 3.4_
 
-  - [ ] 4.4 实现文章服务
+  - [x] 4.4 实现文章服务
     - 创建 `server/src/services/articleService.js`
     - 实现 `createArticle({ title, content, categoryId, tagIds, status })`：创建文章，使用 `marked` 将 Markdown 转 HTML 存储到 `content_html`，自动生成 slug，处理 article_tags 关联
     - 实现 `updateArticle(id, { title, content, categoryId, tagIds, status })`：更新文章，同步更新 `content_html` 和 `updated_at`
