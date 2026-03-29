@@ -111,13 +111,13 @@
     - `GET /api/auth/profile`：需认证，返回当前用户信息
     - _需求: 5.1, 5.2, 5.3_
 
-  - [-] 5.2 实现文章公开路由
+  - [x] 5.2 实现文章公开路由
     - 创建 `server/src/routes/articles.js`
     - `GET /api/articles`：分页获取已发布文章列表，支持 `page` 和 `pageSize` 查询参数
     - `GET /api/articles/:slug`：获取文章详情（仅已发布）
     - _需求: 1.6, 4.1, 4.4_
 
-  - [ ] 5.3 实现文章管理路由
+  - [-] 5.3 实现文章管理路由
     - 在 `server/src/routes/articles.js` 中添加管理路由（需认证中间件）
     - `GET /api/admin/articles`：获取所有文章列表（含草稿）
     - `POST /api/admin/articles`：创建文章
