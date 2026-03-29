@@ -5,6 +5,7 @@
   "main": "src/app.js",
   "scripts": {
     "start": "node src/app.js",
+    "test": "jest",
     "migrate": "knex migrate:latest --knexfile knexfile.js",
     "seed": "knex seed:run --knexfile knexfile.js"
   },
@@ -12,14 +13,17 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.21.0",
-    "better-sqlite3": "^11.6.0",
-    "knex": "^3.1.0",
-    "jsonwebtoken": "^9.0.2",
     "bcryptjs": "^2.4.3",
+    "better-sqlite3": "^11.6.0",
     "cors": "^2.8.5",
-    "marked": "^15.0.0",
+    "express": "^4.21.0",
     "highlight.js": "^11.10.0",
+    "jsonwebtoken": "^9.0.2",
+    "knex": "^3.1.0",
+    "marked": "^15.0.0",
     "pinyin-pro": "^3.26.0"
+  },
+  "devDependencies": {
+    "jest": "^30.3.0"
   }
 }
