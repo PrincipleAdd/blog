@@ -60,7 +60,7 @@
     - 验证失败返回 401 状态码
     - _需求: 5.1, 5.2, 5.3, 5.4_
 
-- [ ] 4. 后端服务层实现
+- [x] 4. 后端服务层实现
   - [x] 4.1 实现认证服务
     - 创建 `server/src/services/authService.js`
     - 实现 `login(username, password)`：验证凭据，返回 JWT token（24 小时过期）
@@ -105,7 +105,7 @@
 
 
 - [ ] 5. 后端 API 路由层
-  - [ ] 5.1 实现认证路由
+  - [x] 5.1 实现认证路由
     - 创建 `server/src/routes/auth.js`
     - `POST /api/auth/login`：调用 authService.login，返回 token
     - `GET /api/auth/profile`：需认证，返回当前用户信息
