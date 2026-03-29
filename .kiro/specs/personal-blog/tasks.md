@@ -14,7 +14,7 @@
     - 创建 `server/knexfile.js` 配置 SQLite 数据库路径
     - _需求: 6.1_
 
-  - [ ] 1.2 创建前端项目骨架
+  - [x] 1.2 创建前端项目骨架
     - 使用 Vite 创建 `client/` 目录的 Vue 3 项目
     - 安装依赖：`vue-router@4`, `pinia`, `axios`, `element-plus`, `marked`, `highlight.js`, `@unhead/vue`
     - 配置 `vite.config.js`，设置开发代理将 `/api` 转发到 `http://localhost:3000`
