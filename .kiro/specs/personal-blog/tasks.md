@@ -125,7 +125,7 @@
     - `DELETE /api/admin/articles/:id`：删除文章
     - _需求: 1.1, 1.2, 1.3, 1.5, 1.6_
 
-  - [-] 5.4 实现分类路由
+  - [x] 5.4 实现分类路由
     - 创建 `server/src/routes/categories.js`
     - `GET /api/categories`：获取所有分类
     - `GET /api/categories/:slug`：获取分类下的文章
@@ -133,7 +133,7 @@
     - `DELETE /api/admin/categories/:id`：删除分类（需认证）
     - _需求: 2.1, 2.3, 2.4_
 
-  - [ ] 5.5 实现标签路由
+  - [-] 5.5 实现标签路由
     - 创建 `server/src/routes/tags.js`
     - `GET /api/tags`：获取所有标签（含文章数）
     - `GET /api/tags/:slug`：获取标签下的文章
