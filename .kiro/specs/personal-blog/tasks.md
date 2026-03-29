@@ -6,7 +6,7 @@
 
 ## 任务列表
 
-- [ ] 1. 初始化项目结构与依赖
+- [x] 1. 初始化项目结构与依赖
   - [x] 1.1 创建后端项目骨架
     - 创建 `server/` 目录，初始化 `package.json`
     - 安装依赖：`express`, `better-sqlite3`, `knex`, `jsonwebtoken`, `bcryptjs`, `cors`, `marked`, `highlight.js`, `pinyin-pro`
@@ -21,7 +21,7 @@
     - _需求: 4.1, 4.3_
 
 - [ ] 2. 数据库设计与迁移
-  - [ ] 2.1 创建数据库连接模块
+  - [x] 2.1 创建数据库连接模块
     - 创建 `server/src/models/db.js`，使用 `better-sqlite3` 初始化数据库连接
     - 启用 WAL 模式和外键约束
     - _需求: 6.1_
