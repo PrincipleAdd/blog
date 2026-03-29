@@ -117,7 +117,7 @@
     - `GET /api/articles/:slug`：获取文章详情（仅已发布）
     - _需求: 1.6, 4.1, 4.4_
 
-  - [-] 5.3 实现文章管理路由
+  - [x] 5.3 实现文章管理路由
     - 在 `server/src/routes/articles.js` 中添加管理路由（需认证中间件）
     - `GET /api/admin/articles`：获取所有文章列表（含草稿）
     - `POST /api/admin/articles`：创建文章
@@ -125,7 +125,7 @@
     - `DELETE /api/admin/articles/:id`：删除文章
     - _需求: 1.1, 1.2, 1.3, 1.5, 1.6_
 
-  - [ ] 5.4 实现分类路由
+  - [-] 5.4 实现分类路由
     - 创建 `server/src/routes/categories.js`
     - `GET /api/categories`：获取所有分类
     - `GET /api/categories/:slug`：获取分类下的文章
