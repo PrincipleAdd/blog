@@ -141,12 +141,12 @@
     - `DELETE /api/admin/tags/:id`：删除标签（需认证）
     - _需求: 3.1, 3.3, 3.4_
 
-  - [-] 5.6 实现 Sitemap 路由
+  - [x] 5.6 实现 Sitemap 路由
     - 创建 `server/src/routes/sitemap.js`
     - `GET /sitemap.xml`：生成包含所有已发布文章 URL 的 XML sitemap
     - _需求: 7.3_
 
-  - [ ] 5.7 注册所有路由到 Express 应用
+  - [-] 5.7 注册所有路由到 Express 应用
     - 在 `server/src/app.js` 中挂载所有路由模块
     - 添加全局错误处理中间件
     - 添加 404 处理
