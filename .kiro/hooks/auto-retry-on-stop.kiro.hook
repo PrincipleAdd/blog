@@ -1,0 +1,13 @@
+{
+  "enabled": true,
+  "name": "意外中断自动重试",
+  "description": "当 agent 执行意外中断时，自动提醒 agent 继续完成未完成的任务",
+  "version": "1",
+  "when": {
+    "type": "agentStop"
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "你的执行似乎被中断了。请检查之前的对话上下文，确认是否还有未完成的任务。如果有，请继续完成剩余工作。如果所有任务已完成，则无需额外操作。"
+  }
+}

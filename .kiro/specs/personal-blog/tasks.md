@@ -7,7 +7,7 @@
 ## 任务列表
 
 - [ ] 1. 初始化项目结构与依赖
-  - [ ] 1.1 创建后端项目骨架
+  - [x] 1.1 创建后端项目骨架
     - 创建 `server/` 目录，初始化 `package.json`
     - 安装依赖：`express`, `better-sqlite3`, `knex`, `jsonwebtoken`, `bcryptjs`, `cors`, `marked`, `highlight.js`, `pinyin-pro`
     - 创建 `server/src/app.js` 入口文件，配置 Express 基础中间件（JSON 解析、CORS）
@@ -46,7 +46,7 @@
     - 实现冲突检测：若 slug 已存在则追加数字后缀（如 `my-post-2`）
     - _需求: 7.1_
 
-  - [ ]* 3.2 编写 Slug 生成的单元测试
+  - [ ] 3.2 编写 Slug 生成的单元测试
     - 测试中文标题转拼音 slug
     - 测试英文标题转 slug
     - 测试特殊字符过滤
@@ -96,7 +96,7 @@
     - 实现 `listByTag(tagSlug, page, pageSize)`：按标签获取文章
     - _需求: 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 2.2_
 
-  - [ ]* 4.5 编写文章服务的单元测试
+  - [ ] 4.5 编写文章服务的单元测试
     - 测试创建文章时 Markdown 正确转换为 HTML
     - 测试草稿文章不出现在已发布列表中
     - 测试删除文章同时清除标签关联
