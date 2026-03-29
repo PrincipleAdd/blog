@@ -39,7 +39,7 @@
     - _需求: 5.1, 5.5_
 
 
-- [ ] 3. 后端工具函数与中间件
+- [x] 3. 后端工具函数与中间件
   - [x] 3.1 实现 Slug 生成工具
     - 创建 `server/src/utils/slug.js`
     - 使用 `pinyin-pro` 将中文标题转拼音，英文转小写，空格替换为 `-`，去除特殊字符
@@ -53,7 +53,7 @@
     - 测试 slug 冲突时的数字后缀追加
     - _需求: 7.1_
 
-  - [-] 3.3 实现 JWT 认证中间件
+  - [x] 3.3 实现 JWT 认证中间件
     - 创建 `server/src/middleware/auth.js`
     - 从 `Authorization: Bearer <token>` 头中提取并验证 JWT
     - 验证成功将 `{ userId, username }` 挂载到 `req.user`
@@ -61,7 +61,7 @@
     - _需求: 5.1, 5.2, 5.3, 5.4_
 
 - [ ] 4. 后端服务层实现
-  - [ ] 4.1 实现认证服务
+  - [x] 4.1 实现认证服务
     - 创建 `server/src/services/authService.js`
     - 实现 `login(username, password)`：验证凭据，返回 JWT token（24 小时过期）
     - 实现 `verifyToken(token)`：解析并验证 JWT
