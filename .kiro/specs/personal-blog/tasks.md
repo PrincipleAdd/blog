@@ -176,7 +176,7 @@
     - 添加基础全局样式，确保响应式布局
     - _需求: 4.3_
 
-- [ ] 8. 前端公开展示页面
+- [x] 8. 前端公开展示页面
   - [x] 8.1 实现首页（Home.vue）
     - 创建 `client/src/views/Home.vue`
     - 调用 `GET /api/articles` 获取文章列表，按发布时间倒序展示
@@ -192,45 +192,45 @@
     - 使用 `@unhead/vue` 动态设置页面 title、meta description、Open Graph 标签
     - _需求: 4.2, 7.1, 7.2, 7.4_
 
-  - [ ] 8.3 实现通用组件
+  - [x] 8.3 实现通用组件
     - 创建 `client/src/components/Pagination.vue`：接收 total、currentPage、pageSize props，触发 page-change 事件
     - 创建 `client/src/components/MarkdownRenderer.vue`：封装 `marked` + `highlight.js`，接收 markdown 内容 prop 渲染为 HTML
     - 创建 `client/src/components/TagCloud.vue`：获取标签列表，根据文章数量调整字体大小，点击跳转到标签文章页
     - _需求: 3.4, 4.2, 4.4_
 
-  - [~] 8.4 实现分类文章页（Category.vue）
+  - [x] 8.4 实现分类文章页（Category.vue）
     - 创建 `client/src/views/Category.vue`
     - 根据路由参数 slug 调用 `GET /api/categories/:slug` 获取分类下的文章列表
     - 展示分类名称和文章列表，支持分页
     - _需求: 2.3_
 
-  - [~] 8.5 实现标签文章页（Tag.vue）
+  - [x] 8.5 实现标签文章页（Tag.vue）
     - 创建 `client/src/views/Tag.vue`
     - 根据路由参数 slug 调用 `GET /api/tags/:slug` 获取标签下的文章列表
     - 展示标签名称和文章列表，支持分页
     - _需求: 3.3_
 
-  - [~] 8.6 实现关于页面（About.vue）
+  - [x] 8.6 实现关于页面（About.vue）
     - 创建 `client/src/views/About.vue`
     - 展示博主个人介绍信息（可硬编码或从配置读取）
     - _需求: 4.5_
 
 
-- [ ] 9. 前端管理后台页面
-  - [~] 9.1 实现登录页（Login.vue）
+- [x] 9. 前端管理后台页面
+  - [x] 9.1 实现登录页（Login.vue）
     - 创建 `client/src/views/admin/Login.vue`
     - 使用 Element Plus 表单组件，包含用户名和密码输入框
     - 提交时调用 `POST /api/auth/login`，成功后存储 token 到 localStorage 并跳转到 Dashboard
     - 登录失败显示错误提示信息
     - _需求: 5.1, 5.2, 5.3_
 
-  - [~] 9.2 实现管理面板首页（Dashboard.vue）
+  - [x] 9.2 实现管理面板首页（Dashboard.vue）
     - 创建 `client/src/views/admin/Dashboard.vue`
     - 展示文章总数、分类总数、标签总数的统计卡片
     - 提供快捷入口：新建文章、管理分类、管理标签
     - _需求: 5.2_
 
-  - [~] 9.3 实现文章编辑器（PostEditor.vue）
+  - [x] 9.3 实现文章编辑器（PostEditor.vue）
     - 创建 `client/src/views/admin/PostEditor.vue`
     - 集成 Markdown 编辑器（使用 `md-editor-v3`），支持实时预览
     - 表单包含：标题输入、分类下拉选择、标签多选、状态切换（草稿/已发布）
@@ -238,26 +238,26 @@
     - 编辑模式：根据路由参数 id 加载文章数据，提交调用 `PUT /api/admin/articles/:id`
     - _需求: 1.1, 1.2, 1.4, 1.5, 1.6, 2.2, 3.1, 3.2_
 
-  - [~] 9.4 实现文章列表管理（PostList.vue）
+  - [x] 9.4 实现文章列表管理（PostList.vue）
     - 创建 `client/src/views/admin/PostList.vue`
     - 调用 `GET /api/admin/articles` 获取所有文章（含草稿）
     - 使用 Element Plus Table 展示文章列表，包含标题、状态、分类、创建时间列
     - 提供编辑按钮（跳转到 PostEditor）和删除按钮（确认后调用 `DELETE /api/admin/articles/:id`）
     - _需求: 1.1, 1.2, 1.3_
 
-  - [~] 9.5 实现分类管理（Categories.vue）
+  - [x] 9.5 实现分类管理（Categories.vue）
     - 创建 `client/src/views/admin/Categories.vue`
     - 展示分类列表，提供新建分类的输入框和提交按钮
     - 提供删除按钮，确认后调用 `DELETE /api/admin/categories/:id`
     - _需求: 2.1, 2.4_
 
-  - [~] 9.6 实现标签管理（Tags.vue）
+  - [x] 9.6 实现标签管理（Tags.vue）
     - 创建 `client/src/views/admin/Tags.vue`
     - 展示标签列表（含文章数），提供新建标签的输入框和提交按钮
     - 提供删除按钮，确认后调用 `DELETE /api/admin/tags/:id`
     - _需求: 3.1_
 
-- [~] 10. 检查点 - 前端功能验证
+- [x] 10. 检查点 - 前端功能验证
   - 确保所有前端页面可正常渲染，路由跳转正确，API 调用正常。如有问题请向用户确认。
 
 - [ ] 11. 部署配置
