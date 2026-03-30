@@ -152,39 +152,39 @@
     - 添加 404 处理
     - _需求: 6.1_
 
-- [-] 6. 检查点 - 后端功能验证
+- [x] 6. 检查点 - 后端功能验证
   - 确保所有后端 API 可正常运行，数据库迁移和种子数据正确执行。如有问题请向用户确认。
 
 
-- [ ] 7. 前端基础架构
-  - [ ] 7.1 配置 Vue Router 路由
+- [x] 7. 前端基础架构
+  - [x] 7.1 配置 Vue Router 路由
     - 创建 `client/src/router/index.js`
     - 配置公开路由：`/`（首页）、`/posts/:slug`（文章详情）、`/categories/:slug`（分类文章）、`/tags/:slug`（标签文章）、`/about`（关于）
     - 配置管理路由：`/admin/login`、`/admin/dashboard`、`/admin/posts`、`/admin/posts/new`、`/admin/posts/:id/edit`、`/admin/categories`、`/admin/tags`
     - 管理路由添加导航守卫，未登录跳转到登录页
     - _需求: 5.1, 7.1_
 
-  - [ ] 7.2 配置 Pinia 状态管理与 API 封装
+  - [x] 7.2 配置 Pinia 状态管理与 API 封装
     - 创建 `client/src/stores/auth.js`：管理登录状态、token 存储（localStorage）、登出逻辑
     - 创建 `client/src/api/index.js`：封装 Axios 实例，配置请求拦截器自动附加 Authorization 头，响应拦截器处理 401 跳转登录
     - 创建 `client/src/api/articles.js`、`categories.js`、`tags.js`、`auth.js`：各模块 API 请求方法
     - _需求: 5.2, 5.4_
 
-  - [ ] 7.3 配置 Element Plus 和全局样式
+  - [x] 7.3 配置 Element Plus 和全局样式
     - 在 `client/src/main.js` 中注册 Element Plus、Pinia、Router、@unhead/vue
     - 创建 `client/src/App.vue`，设置公开页面和管理后台的布局切换
     - 添加基础全局样式，确保响应式布局
     - _需求: 4.3_
 
 - [ ] 8. 前端公开展示页面
-  - [ ] 8.1 实现首页（Home.vue）
+  - [x] 8.1 实现首页（Home.vue）
     - 创建 `client/src/views/Home.vue`
     - 调用 `GET /api/articles` 获取文章列表，按发布时间倒序展示
     - 每篇文章展示标题、摘要（content_md 截取前 200 字符）、发布时间、分类、标签
     - 集成 Pagination 分页组件，每页 10 篇
     - _需求: 4.1, 4.4_
 
-  - [ ] 8.2 实现文章详情页（Post.vue）
+  - [x] 8.2 实现文章详情页（Post.vue）
     - 创建 `client/src/views/Post.vue`
     - 根据路由参数 slug 调用 `GET /api/articles/:slug` 获取文章
     - 使用 MarkdownRenderer 组件渲染文章内容
@@ -198,39 +198,39 @@
     - 创建 `client/src/components/TagCloud.vue`：获取标签列表，根据文章数量调整字体大小，点击跳转到标签文章页
     - _需求: 3.4, 4.2, 4.4_
 
-  - [ ] 8.4 实现分类文章页（Category.vue）
+  - [~] 8.4 实现分类文章页（Category.vue）
     - 创建 `client/src/views/Category.vue`
     - 根据路由参数 slug 调用 `GET /api/categories/:slug` 获取分类下的文章列表
     - 展示分类名称和文章列表，支持分页
     - _需求: 2.3_
 
-  - [ ] 8.5 实现标签文章页（Tag.vue）
+  - [~] 8.5 实现标签文章页（Tag.vue）
     - 创建 `client/src/views/Tag.vue`
     - 根据路由参数 slug 调用 `GET /api/tags/:slug` 获取标签下的文章列表
     - 展示标签名称和文章列表，支持分页
     - _需求: 3.3_
 
-  - [ ] 8.6 实现关于页面（About.vue）
+  - [~] 8.6 实现关于页面（About.vue）
     - 创建 `client/src/views/About.vue`
     - 展示博主个人介绍信息（可硬编码或从配置读取）
     - _需求: 4.5_
 
 
 - [ ] 9. 前端管理后台页面
-  - [ ] 9.1 实现登录页（Login.vue）
+  - [~] 9.1 实现登录页（Login.vue）
     - 创建 `client/src/views/admin/Login.vue`
     - 使用 Element Plus 表单组件，包含用户名和密码输入框
     - 提交时调用 `POST /api/auth/login`，成功后存储 token 到 localStorage 并跳转到 Dashboard
     - 登录失败显示错误提示信息
     - _需求: 5.1, 5.2, 5.3_
 
-  - [ ] 9.2 实现管理面板首页（Dashboard.vue）
+  - [~] 9.2 实现管理面板首页（Dashboard.vue）
     - 创建 `client/src/views/admin/Dashboard.vue`
     - 展示文章总数、分类总数、标签总数的统计卡片
     - 提供快捷入口：新建文章、管理分类、管理标签
     - _需求: 5.2_
 
-  - [ ] 9.3 实现文章编辑器（PostEditor.vue）
+  - [~] 9.3 实现文章编辑器（PostEditor.vue）
     - 创建 `client/src/views/admin/PostEditor.vue`
     - 集成 Markdown 编辑器（使用 `md-editor-v3`），支持实时预览
     - 表单包含：标题输入、分类下拉选择、标签多选、状态切换（草稿/已发布）
@@ -238,36 +238,36 @@
     - 编辑模式：根据路由参数 id 加载文章数据，提交调用 `PUT /api/admin/articles/:id`
     - _需求: 1.1, 1.2, 1.4, 1.5, 1.6, 2.2, 3.1, 3.2_
 
-  - [ ] 9.4 实现文章列表管理（PostList.vue）
+  - [~] 9.4 实现文章列表管理（PostList.vue）
     - 创建 `client/src/views/admin/PostList.vue`
     - 调用 `GET /api/admin/articles` 获取所有文章（含草稿）
     - 使用 Element Plus Table 展示文章列表，包含标题、状态、分类、创建时间列
     - 提供编辑按钮（跳转到 PostEditor）和删除按钮（确认后调用 `DELETE /api/admin/articles/:id`）
     - _需求: 1.1, 1.2, 1.3_
 
-  - [ ] 9.5 实现分类管理（Categories.vue）
+  - [~] 9.5 实现分类管理（Categories.vue）
     - 创建 `client/src/views/admin/Categories.vue`
     - 展示分类列表，提供新建分类的输入框和提交按钮
     - 提供删除按钮，确认后调用 `DELETE /api/admin/categories/:id`
     - _需求: 2.1, 2.4_
 
-  - [ ] 9.6 实现标签管理（Tags.vue）
+  - [~] 9.6 实现标签管理（Tags.vue）
     - 创建 `client/src/views/admin/Tags.vue`
     - 展示标签列表（含文章数），提供新建标签的输入框和提交按钮
     - 提供删除按钮，确认后调用 `DELETE /api/admin/tags/:id`
     - _需求: 3.1_
 
-- [ ] 10. 检查点 - 前端功能验证
+- [~] 10. 检查点 - 前端功能验证
   - 确保所有前端页面可正常渲染，路由跳转正确，API 调用正常。如有问题请向用户确认。
 
 - [ ] 11. 部署配置
-  - [ ] 11.1 创建 PM2 配置文件
+  - [~] 11.1 创建 PM2 配置文件
     - 创建 `ecosystem.config.js`
     - 配置 Node.js 应用名称、入口文件路径、日志文件路径
     - 配置开机自启
     - _需求: 6.3, 6.4_
 
-  - [ ] 11.2 创建 Nginx 配置文件
+  - [~] 11.2 创建 Nginx 配置文件
     - 创建 `nginx.conf`
     - 配置静态文件服务：将 `/` 指向 Vue 构建产物目录
     - 配置反向代理：将 `/api` 和 `/sitemap.xml` 转发到 Express（端口 3000）
@@ -275,13 +275,13 @@
     - 配置 gzip 压缩和静态资源缓存头
     - _需求: 6.1, 6.2_
 
-  - [ ] 11.3 创建构建与部署脚本
+  - [~] 11.3 创建构建与部署脚本
     - 在 `server/package.json` 中添加 `start` 和 `migrate` 脚本
     - 在 `client/package.json` 中确认 `build` 脚本输出到正确目录
     - 创建根目录 `deploy.sh` 脚本：安装依赖、运行迁移、构建前端、重启 PM2
     - _需求: 6.1, 6.3_
 
-- [ ] 12. 最终检查点 - 全部功能验证
+- [~] 12. 最终检查点 - 全部功能验证
   - 确保所有测试通过，前后端联调正常，部署配置文件完整。如有问题请向用户确认。
 
 ## 备注
