@@ -2,45 +2,44 @@
   <div>
     <!-- 骨架屏 -->
     <template v-if="loading">
-      <div v-for="i in 5" :key="i" style="padding: 24px 0; border-bottom: 1px solid var(--border);">
+      <div v-for="i in 5" :key="i" style="padding: 20px 0; border-bottom: 1px solid var(--border);">
         <el-skeleton :rows="3" animated />
       </div>
     </template>
 
     <!-- 空状态 -->
     <div v-else-if="!articles.length" class="empty-state">
-      <div style="font-size: 32px; margin-bottom: 12px;">📭</div>
-      <div>暂无文章，快去写第一篇吧</div>
+      <div style="font-size: 32px; margin-bottom: 10px;">📭</div>
+      暂无文章
     </div>
 
     <!-- 文章列表 -->
-    <ul v-else class="post-list">
-      <li v-for="article in articles" :key="article.id" class="post-item">
-        <div class="post-item-meta">
-          <span class="meta-date">{{ formatDate(article.created_at) }}</span>
-          <router-link
-            v-if="article.category"
-            :to="`/categories/${article.category.slug}`"
-            class="meta-category"
-          >{{ article.category.name }}</router-link>
+    <ul v-else class="archive__item-list">
+      <li v-for="article in articles" :key="article.id" class="archive__item">
+        <div class="page__meta">
+          <span>{{ formatDate(article.created_at) }}</span>
+          <span v-if="article.category" class="page__meta-sep">·</span>
+          <router-link v-if="article.category" :to="`/categories/${article.category.slug}`">
+            {{ article.category.name }}
+          </router-link>
         </div>
-        <h2 class="post-item-title">
+        <h2 class="archive__item-title">
           <router-link :to="`/posts/${article.slug}`">{{ article.title }}</router-link>
         </h2>
-        <p class="post-item-summary">{{ extractSummary(article.content_md) }}</p>
-        <div v-if="article.tags?.length" class="post-item-tags">
+        <p class="archive__item-excerpt">{{ extractSummary(article.content_md) }}</p>
+        <div v-if="article.tags?.length" class="archive__item-tags">
           <router-link
             v-for="tag in article.tags"
             :key="tag.id"
             :to="`/tags/${tag.slug}`"
-            class="post-tag"
-          ># {{ tag.name }}</router-link>
+            class="archive__item-tag"
+          >{{ tag.name }}</router-link>
         </div>
       </li>
     </ul>
 
     <!-- 分页 -->
-    <div v-if="total > pageSize" class="pagination">
+    <div v-if="total > pageSize" class="pagination-wrap">
       <el-pagination
         v-model:current-page="currentPage"
         :page-size="pageSize"
@@ -70,11 +69,7 @@ async function fetchArticles(page = 1) {
     articles.value = res.data.articles || []
     total.value = res.data.total || 0
     currentPage.value = page
-  } catch {
-    articles.value = []
-  } finally {
-    loading.value = false
-  }
+  } catch { articles.value = [] } finally { loading.value = false }
 }
 
 function extractSummary(md) {
@@ -92,7 +87,7 @@ function extractSummary(md) {
 function formatDate(d) {
   if (!d) return ''
   const date = new Date(d)
-  return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`
+  return `${date.getFullYear()}-${String(date.getMonth()+1).padStart(2,'0')}-${String(date.getDate()).padStart(2,'0')}`
 }
 
 onMounted(() => fetchArticles(1))

@@ -1,29 +1,32 @@
 <template>
   <div>
-    <h1 class="page-heading"># {{ tagName || route.params.slug }}</h1>
+    <h1 class="page__title">{{ tagName || route.params.slug }}</h1>
 
     <template v-if="loading">
-      <div v-for="i in 3" :key="i" style="padding: 20px 0; border-bottom: 1px solid var(--border);">
+      <div v-for="i in 3" :key="i" style="padding: 18px 0; border-bottom: 1px solid var(--border);">
         <el-skeleton :rows="2" animated />
       </div>
     </template>
 
     <div v-else-if="!articles.length" class="empty-state">该标签下暂无文章</div>
 
-    <ul v-else class="post-list">
-      <li v-for="article in articles" :key="article.id" class="post-item">
-        <div class="post-item-meta">
-          <span class="meta-date">{{ formatDate(article.created_at) }}</span>
-          <span v-if="article.category" class="meta-category">{{ article.category.name }}</span>
+    <ul v-else class="archive__item-list">
+      <li v-for="article in articles" :key="article.id" class="archive__item">
+        <div class="page__meta">
+          <span>{{ article.created_at?.slice(0,10) }}</span>
+          <span v-if="article.category" class="page__meta-sep">·</span>
+          <router-link v-if="article.category" :to="`/categories/${article.category.slug}`">
+            {{ article.category.name }}
+          </router-link>
         </div>
-        <h2 class="post-item-title">
+        <h2 class="archive__item-title">
           <router-link :to="`/posts/${article.slug}`">{{ article.title }}</router-link>
         </h2>
-        <p class="post-item-summary">{{ extractSummary(article.content_md) }}</p>
+        <p class="archive__item-excerpt">{{ extractSummary(article.content_md) }}</p>
       </li>
     </ul>
 
-    <div v-if="total > 10" class="pagination">
+    <div v-if="total > 10" class="pagination-wrap">
       <el-pagination v-model:current-page="currentPage" :page-size="10" :total="total"
         layout="prev, pager, next" background @current-change="fetchArticles" />
     </div>
@@ -53,11 +56,10 @@ async function fetchArticles(page = 1) {
   } catch { articles.value = [] } finally { loading.value = false }
 }
 
-function formatDate(d) { return d ? d.slice(0, 10) : '' }
 function extractSummary(md) {
   if (!md) return ''
-  return md.replace(/!\[.*?\]\(.*?\)/g, '').replace(/\[([^\]]+)\]\(.*?\)/g, '$1')
-    .replace(/#{1,6}\s+/g, '').replace(/[*_`~>]+/g, '').replace(/\n+/g, ' ').trim().slice(0, 160)
+  return md.replace(/!\[.*?\]\(.*?\)/g,'').replace(/\[([^\]]+)\]\(.*?\)/g,'$1')
+    .replace(/#{1,6}\s+/g,'').replace(/[*_`~>]+/g,'').replace(/\n+/g,' ').trim().slice(0,160)
 }
 
 onMounted(() => fetchArticles(1))

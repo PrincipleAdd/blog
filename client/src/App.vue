@@ -21,45 +21,69 @@
     </el-container>
   </el-container>
 
-  <!-- 公开页面：侧边栏 + 内容区 -->
-  <div v-else class="blog-layout" :data-theme="theme">
-    <!-- 侧边栏 -->
-    <aside class="blog-sidebar">
-      <div class="sidebar-avatar">{{ avatarLetter }}</div>
-      <div class="sidebar-name">{{ siteConfig.name }}</div>
-      <div class="sidebar-bio">{{ siteConfig.bio }}</div>
-
-      <nav>
-        <ul class="sidebar-nav">
-          <li><router-link to="/"><span class="nav-icon">📝</span> 文章</router-link></li>
-          <li><router-link to="/about"><span class="nav-icon">👤</span> 关于</router-link></li>
-        </ul>
-      </nav>
-
-      <hr class="sidebar-divider" />
-
-      <div v-if="tags.length">
-        <div class="sidebar-section-title">标签</div>
-        <div class="sidebar-tags">
-          <router-link
-            v-for="tag in tags.slice(0, 12)"
-            :key="tag.id"
-            :to="`/tags/${tag.slug}`"
-            class="sidebar-tag"
-          >{{ tag.name }}</router-link>
-        </div>
+  <!-- 公开页面 -->
+  <div v-else :data-theme="theme">
+    <!-- 顶部导航栏 -->
+    <header class="masthead">
+      <div class="masthead__inner">
+        <router-link to="/" class="masthead__title">{{ siteConfig.title }}</router-link>
+        <nav class="masthead__nav">
+          <router-link to="/">文章</router-link>
+          <router-link to="/about">关于</router-link>
+          <button class="masthead__theme-btn" @click="toggleTheme">
+            {{ theme === 'dark' ? '☀️' : '🌙' }}
+          </button>
+        </nav>
       </div>
+    </header>
 
-      <button class="theme-toggle" @click="toggleTheme">
-        <span>{{ theme === 'dark' ? '☀️' : '🌙' }}</span>
-        {{ theme === 'dark' ? '浅色模式' : '深色模式' }}
-      </button>
-    </aside>
+    <!-- 主体：侧边栏 + 内容 -->
+    <div class="page-wrapper">
+      <!-- 左侧作者信息栏 -->
+      <aside class="author-profile">
+        <div class="author__avatar">
+          <div class="author__avatar-placeholder">{{ avatarLetter }}</div>
+        </div>
+        <h3 class="author__name">{{ siteConfig.author }}</h3>
+        <p class="author__bio">{{ siteConfig.bio }}</p>
 
-    <!-- 主内容 -->
-    <main class="blog-content">
-      <router-view />
-    </main>
+        <ul class="author__urls">
+          <li v-if="siteConfig.email">
+            <a :href="`mailto:${siteConfig.email}`">
+              <span class="url-icon">✉️</span> {{ siteConfig.email }}
+            </a>
+          </li>
+          <li v-if="siteConfig.github">
+            <a :href="siteConfig.github" target="_blank" rel="noopener">
+              <span class="url-icon">🐙</span> GitHub
+            </a>
+          </li>
+          <li v-if="siteConfig.location">
+            <span style="display:flex;align-items:center;gap:8px;font-size:13px;color:var(--text-muted);">
+              <span class="url-icon">📍</span> {{ siteConfig.location }}
+            </span>
+          </li>
+        </ul>
+
+        <template v-if="tags.length">
+          <hr class="author__divider" />
+          <div class="author__section-title">标签</div>
+          <div class="author__tags">
+            <router-link
+              v-for="tag in tags.slice(0, 15)"
+              :key="tag.id"
+              :to="`/tags/${tag.slug}`"
+              class="author__tag"
+            >{{ tag.name }}</router-link>
+          </div>
+        </template>
+      </aside>
+
+      <!-- 右侧内容区 -->
+      <main class="page-content">
+        <router-view />
+      </main>
+    </div>
   </div>
 </template>
 
@@ -75,13 +99,17 @@ const router = useRouter()
 const isLoginPage = computed(() => route.path === '/admin/login')
 const isAdminPage = computed(() => route.path.startsWith('/admin') && !isLoginPage.value)
 
-// 站点配置（可按需修改）
+// 站点配置 — 按需修改
 const siteConfig = {
-  name: '我的博客',
-  bio: '记录技术与思考，分享学习与生活。'
+  title: 'Principle',
+  author: 'Principle',
+  bio: '记录技术与思考，分享学习与生活。',
+  email: '1369401433@qq.com',
+  github: 'https://github.com/PrincipleAdd',
+  location: 'China'
 }
 
-const avatarLetter = computed(() => siteConfig.name.charAt(0))
+const avatarLetter = computed(() => siteConfig.author.charAt(0).toUpperCase())
 
 // 暗色模式
 const theme = ref(localStorage.getItem('theme') || 'light')
@@ -92,7 +120,7 @@ function toggleTheme() {
   document.documentElement.setAttribute('data-theme', theme.value)
 }
 
-// 标签列表（侧边栏展示）
+// 侧边栏标签
 const tags = ref([])
 
 async function loadTags() {
