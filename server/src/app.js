@@ -11,6 +11,7 @@ const adminCategoryRoutes = require('./routes/adminCategories');
 const tagRoutes = require('./routes/tags');
 const adminTagRoutes = require('./routes/adminTags');
 const sitemapRoutes = require('./routes/sitemap');
+const uploadRoutes = require('./routes/upload');
 
 // 导入数据库模块
 const { knex } = require('./models/db');
@@ -60,6 +61,12 @@ app.use('/api/admin/tags', adminTagRoutes);
 
 // Sitemap 路由
 app.use('/', sitemapRoutes);
+
+// 图片上传路由（需认证）
+app.use('/api/admin/upload', uploadRoutes);
+
+// 静态文件：上传的图片
+app.use('/uploads', express.static(path.join(__dirname, '../uploads')));
 
 // ========== 404 处理 ==========
 
