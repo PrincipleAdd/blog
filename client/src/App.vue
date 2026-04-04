@@ -26,6 +26,10 @@
     <!-- 顶部导航栏 -->
     <header class="masthead">
       <div class="masthead__inner">
+        <!-- 汉堡菜单按钮（移动端显示） -->
+        <button class="mobile-menu-btn" @click="drawerOpen = true" aria-label="打开菜单">
+          ☰
+        </button>
         <router-link to="/" class="masthead__title">{{ siteConfig.title }}</router-link>
         <nav class="masthead__nav">
           <router-link to="/">文章</router-link>
@@ -37,10 +41,71 @@
       </div>
     </header>
 
+    <!-- 移动端侧边栏遮罩 -->
+    <div class="sidebar-overlay" :class="{ active: drawerOpen }" @click="drawerOpen = false" />
+
     <!-- 主体：侧边栏 + 内容 -->
     <div class="page-wrapper">
-      <!-- 左侧作者信息栏 -->
-      <aside class="author-profile">
+      <!-- 左侧作者信息栏（桌面端固定，移动端抽屉） -->
+      <aside class="author-profile" :class="{ drawer: true, open: drawerOpen }">
+        <button class="drawer-close-btn" @click="drawerOpen = false" aria-label="关闭菜单">✕</button>
+
+        <div class="author__avatar">
+          <div class="author__avatar-placeholder">{{ avatarLetter }}</div>
+        </div>
+        <h3 class="author__name">{{ siteConfig.author }}</h3>
+        <p class="author__bio">{{ siteConfig.bio }}</p>
+
+        <ul class="author__urls">
+          <li v-if="siteConfig.email">
+            <a :href="`mailto:${siteConfig.email}`">
+              <span class="url-icon">✉️</span> {{ siteConfig.email }}
+            </a>
+          </li>
+          <li v-if="siteConfig.github">
+            <a :href="siteConfig.github" target="_blank" rel="noopener">
+              <span class="url-icon">🐙</span> GitHub
+            </a>
+          </li>
+          <li v-if="siteConfig.location">
+            <span style="display:flex;align-items:center;gap:8px;font-size:13px;color:var(--text-muted);">
+              <span class="url-icon">📍</span> {{ siteConfig.location }}
+            </span>
+          </li>
+        </ul>
+
+        <template v-if="tags.length">
+          <hr class="author__divider" />
+          <div class="author__section-title">标签</div>
+          <div class="author__tags">
+            <router-link
+              v-for="tag in tags.slice(0, 15)"
+              :key="tag.id"
+              :to="`/tags/${tag.slug}`"
+              class="author__tag"
+              @click="drawerOpen = false"
+            >{{ tag.name }}</router-link>
+          </div>
+        </template>
+
+        <!-- 移动端导航链接 -->
+        <hr class="author__divider" />
+        <nav style="display: flex; flex-direction: column; gap: 4px;">
+          <router-link
+            to="/"
+            style="padding: 8px 10px; border-radius: 6px; font-size: 14px; color: var(--text-secondary);"
+            @click="drawerOpen = false"
+          >📝 文章</router-link>
+          <router-link
+            to="/about"
+            style="padding: 8px 10px; border-radius: 6px; font-size: 14px; color: var(--text-secondary);"
+            @click="drawerOpen = false"
+          >👤 关于</router-link>
+        </nav>
+      </aside>
+
+      <!-- 桌面端固定侧边栏（非抽屉） -->
+      <aside class="author-profile desktop-sidebar">
         <div class="author__avatar">
           <div class="author__avatar-placeholder">{{ avatarLetter }}</div>
         </div>
@@ -88,7 +153,7 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, onMounted, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { House, Document, Folder, Collection, SwitchButton } from '@element-plus/icons-vue'
 import { getTags } from './api/tags.js'
@@ -99,7 +164,6 @@ const router = useRouter()
 const isLoginPage = computed(() => route.path === '/admin/login')
 const isAdminPage = computed(() => route.path.startsWith('/admin') && !isLoginPage.value)
 
-// 站点配置 — 按需修改
 const siteConfig = {
   title: 'Principle',
   author: 'Principle',
@@ -113,16 +177,20 @@ const avatarLetter = computed(() => siteConfig.author.charAt(0).toUpperCase())
 
 // 暗色模式
 const theme = ref(localStorage.getItem('theme') || 'light')
-
 function toggleTheme() {
   theme.value = theme.value === 'dark' ? 'light' : 'dark'
   localStorage.setItem('theme', theme.value)
   document.documentElement.setAttribute('data-theme', theme.value)
 }
 
+// 移动端抽屉
+const drawerOpen = ref(false)
+
+// 路由切换时关闭抽屉
+watch(() => route.path, () => { drawerOpen.value = false })
+
 // 侧边栏标签
 const tags = ref([])
-
 async function loadTags() {
   try {
     const res = await getTags()

@@ -500,24 +500,167 @@ a:hover { text-decoration: underline; color: var(--accent-hover); }
 .admin-aside { background-color: #001529; min-height: 100vh; }
 
 /* ==========================================================================
-   响应式
+   移动端导航抽屉
    ========================================================================== */
-@media (max-width: 925px) {
-  .author-profile {
-    display: none;
-  }
-  .page-wrapper {
-    gap: 0;
-  }
+.mobile-menu-btn {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+  color: var(--text-muted);
+  font-size: 20px;
+  line-height: 1;
 }
 
+/* 移动端侧边栏抽屉遮罩 */
+.sidebar-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  z-index: 299;
+}
+
+.sidebar-overlay.active { display: block; }
+
+/* 抽屉侧边栏（移动端） */
+.author-profile.drawer {
+  display: none; /* 默认隐藏，由 JS 控制 */
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 280px;
+  max-height: 100vh;
+  background: var(--bg);
+  z-index: 300;
+  padding: 24px 20px;
+  box-shadow: 2px 0 16px rgba(0,0,0,0.15);
+  transform: translateX(-100%);
+  transition: transform 0.25s ease;
+  overflow-y: auto;
+}
+
+.author-profile.drawer.open {
+  transform: translateX(0);
+}
+
+/* 桌面端固定侧边栏 */
+.author-profile.desktop-sidebar {
+  display: block;
+}
+
+.drawer-close-btn {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: var(--text-muted);
+  padding: 4px;
+  line-height: 1;
+}
+
+/* ==========================================================================
+   响应式 - 平板 (≤ 925px)
+   ========================================================================== */
+@media (max-width: 925px) {
+  /* 桌面侧边栏隐藏 */
+  .author-profile.desktop-sidebar { display: none; }
+  /* 抽屉侧边栏启用 */
+  .author-profile.drawer { display: block; }
+  .page-wrapper { gap: 0; }
+  /* 显示汉堡菜单按钮 */
+  .mobile-menu-btn { display: flex; align-items: center; }
+}
+
+/* ==========================================================================
+   响应式 - 手机 (≤ 768px)
+   ========================================================================== */
 @media (max-width: 768px) {
-  .masthead__inner { padding: 0 14px; height: 56px; }
+  /* 导航栏 */
+  .masthead__inner {
+    padding: 0 14px;
+    height: 52px;
+  }
   .masthead__title { font-size: 16px; }
-  .masthead__nav a { padding: 5px 8px; font-size: 13px; }
+  .masthead__nav a {
+    padding: 4px 8px;
+    font-size: 13px;
+  }
+  .masthead__theme-btn {
+    padding: 4px 8px;
+    font-size: 12px;
+  }
+
+  /* 页面布局 */
   .page-wrapper { padding: 0 14px; }
-  .page-content { padding: 20px 0 32px; }
-  .page__post-title { font-size: 21px; }
-  .page__content { font-size: 15px; }
+  .page-content { padding: 16px 0 28px; }
+
+  /* 文章列表 */
+  .archive__item { padding: 16px 0; }
+  .archive__item-title { font-size: 16px; }
+  .archive__item-excerpt { font-size: 13px; -webkit-line-clamp: 3; }
+
+  /* 文章详情 */
+  .page__post-title { font-size: 20px; }
+  .page__content { font-size: 15px; line-height: 1.8; }
+
+  /* 代码块横向滚动 */
+  .page__content pre {
+    font-size: 12.5px;
+    padding: 12px;
+    border-radius: 4px;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* 表格横向滚动容器 */
+  .page__content table {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    font-size: 13px;
+  }
+
+  /* 图片最大宽度 */
+  .page__content img { max-width: 100%; height: auto; }
+
+  /* 页面标题 */
+  .page__title { font-size: 18px; margin-bottom: 14px; }
+
+  /* 分页居中 */
+  .pagination-wrap { padding: 20px 0 0; }
+
+  /* 管理后台侧边栏隐藏 */
   .admin-aside { display: none; }
+
+  /* 编辑器页面适配 */
+  .editor-header {
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 8px 0 10px;
+  }
+  .editor-header-right { flex-wrap: wrap; gap: 6px; }
+  .title-input { font-size: 18px; }
+  .meta-bar { flex-wrap: wrap; }
+}
+
+/* ==========================================================================
+   响应式 - 小屏手机 (≤ 480px)
+   ========================================================================== */
+@media (max-width: 480px) {
+  .page__post-title { font-size: 18px; }
+  .archive__item-title { font-size: 15px; }
+  .page-wrapper { padding: 0 12px; }
+
+  /* 标签换行 */
+  .archive__item-tags { gap: 4px; }
+  .archive__item-tag { font-size: 11px; padding: 1px 6px; }
+
+  /* 文章 meta 信息 */
+  .page__post-meta { gap: 8px; font-size: 12px; }
+  .page__meta { gap: 6px; font-size: 12px; }
 }
