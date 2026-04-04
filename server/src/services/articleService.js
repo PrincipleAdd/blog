@@ -224,6 +224,8 @@ function listAllArticles(page = 1, pageSize = 10) {
 function listByCategory(categorySlug, page = 1, pageSize = 10) {
   const offset = (page - 1) * pageSize;
 
+  const category = db.prepare('SELECT * FROM categories WHERE slug = ?').get(categorySlug);
+
   const total = db.prepare(
     `SELECT COUNT(*) AS count
      FROM articles a
@@ -240,7 +242,7 @@ function listByCategory(categorySlug, page = 1, pageSize = 10) {
      LIMIT ? OFFSET ?`
   ).all(categorySlug, pageSize, offset);
 
-  return { articles: attachTagsToArticles(articles), total };
+  return { articles: attachTagsToArticles(articles), total, category: category || null };
 }
 
 /**
@@ -252,6 +254,8 @@ function listByCategory(categorySlug, page = 1, pageSize = 10) {
  */
 function listByTag(tagSlug, page = 1, pageSize = 10) {
   const offset = (page - 1) * pageSize;
+
+  const tag = db.prepare('SELECT * FROM tags WHERE slug = ?').get(tagSlug);
 
   const total = db.prepare(
     `SELECT COUNT(*) AS count
@@ -272,7 +276,7 @@ function listByTag(tagSlug, page = 1, pageSize = 10) {
      LIMIT ? OFFSET ?`
   ).all(tagSlug, pageSize, offset);
 
-  return { articles: attachTagsToArticles(articles), total };
+  return { articles: attachTagsToArticles(articles), total, tag: tag || null };
 }
 
 module.exports = {

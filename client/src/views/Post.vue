@@ -15,9 +15,9 @@
         <h1 class="page__post-title">{{ article.title }}</h1>
         <div class="page__post-meta">
           <span>{{ formatDate(article.created_at) }}</span>
-          <span v-if="article.category">·</span>
-          <router-link v-if="article.category" :to="`/categories/${article.category.slug}`">
-            {{ article.category.name }}
+          <span v-if="article.category_name">·</span>
+          <router-link v-if="article.category_name" :to="`/categories/${article.category_slug}`">
+            {{ article.category_name }}
           </router-link>
           <template v-if="article.tags?.length">
             <span>·</span>

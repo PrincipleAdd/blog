@@ -14,9 +14,9 @@
       <li v-for="article in articles" :key="article.id" class="archive__item">
         <div class="page__meta">
           <span>{{ article.created_at?.slice(0,10) }}</span>
-          <span v-if="article.category" class="page__meta-sep">·</span>
-          <router-link v-if="article.category" :to="`/categories/${article.category.slug}`">
-            {{ article.category.name }}
+          <span v-if="article.category_name" class="page__meta-sep">·</span>
+          <router-link v-if="article.category_name" :to="`/categories/${article.category_slug}`">
+            {{ article.category_name }}
           </router-link>
         </div>
         <h2 class="archive__item-title">
@@ -51,7 +51,7 @@ async function fetchArticles(page = 1) {
     const res = await getTagArticles(route.params.slug, page, 10)
     articles.value = res.data.articles || []
     total.value = res.data.total || 0
-    tagName.value = res.data.tag?.name || ''
+    tagName.value = res.data.tag?.name || articles.value[0]?.tag_name || route.params.slug
     currentPage.value = page
   } catch { articles.value = [] } finally { loading.value = false }
 }

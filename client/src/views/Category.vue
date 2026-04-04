@@ -47,7 +47,10 @@ async function fetchArticles(page = 1) {
     const res = await getCategoryArticles(route.params.slug, page, 10)
     articles.value = res.data.articles || []
     total.value = res.data.total || 0
-    categoryName.value = res.data.category?.name || ''
+    // 从第一篇文章取分类名，或从 category 字段取
+    categoryName.value = res.data.category?.name
+      || articles.value[0]?.category_name
+      || route.params.slug
     currentPage.value = page
   } catch { articles.value = [] } finally { loading.value = false }
 }

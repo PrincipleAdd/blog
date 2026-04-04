@@ -18,9 +18,9 @@
       <li v-for="article in articles" :key="article.id" class="archive__item">
         <div class="page__meta">
           <span>{{ formatDate(article.created_at) }}</span>
-          <span v-if="article.category" class="page__meta-sep">·</span>
-          <router-link v-if="article.category" :to="`/categories/${article.category.slug}`">
-            {{ article.category.name }}
+          <span v-if="article.category_name" class="page__meta-sep">·</span>
+          <router-link v-if="article.category_name" :to="`/categories/${article.category_slug}`">
+            {{ article.category_name }}
           </router-link>
         </div>
         <h2 class="archive__item-title">
